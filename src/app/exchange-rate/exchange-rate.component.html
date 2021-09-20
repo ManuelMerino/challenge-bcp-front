@@ -1,0 +1,58 @@
+<div class="card m-5">
+    <div class="card-header">
+        Cambio de Monedas
+    </div>
+    <div class="card-body">
+        <form>
+            <div class="form-group row">
+                <label for="staticEmail" class="col-sm-2 col-form-label">Moneda Origen</label>
+                <div class="col-sm-3">
+                    <input type="number" #amount class="form-control" id="staticEmail" value="" (change)="clean()">
+                </div>
+                <div class="col-sm-2">
+                    <div class="dropdown">
+                        <select #originCurrency class="form-control">
+                            <option [value]="item" *ngFor="let item of currencies">{{item}}</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <button type="button" class="btn btn-primary"
+                        (click)="convert(amount.value, originCurrency.value, destinationCurrency.value)">Convertir</button>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="destinationCurrency" class="col-sm-2 col-form-label">Moneda Destino</label>
+                <div class="col-sm-3">
+                    <input type="number" class="form-control" name="destinationCurrency"
+                        [(ngModel)]="exchangeRateResponse.amountWithExchangeRate" readonly>
+                </div>
+                <div class="col-sm-3">
+                    <div class="dropdown">
+                        <select #destinationCurrency class="form-control" >
+                            <option [value]="item" *ngFor="let item of currencies">{{item}}</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group row">
+                <label for="exchangeRate" class="col-sm-2 col-form-label">Tipo de Cambio</label>
+                <div class="col-sm-3">
+                    <input type="text" class="form-control-plaintext" name="exchangeRate"
+                        [(ngModel)]="exchangeRateResponse.exchangeRate" readonly>
+                </div>
+            </div>
+            <div class="form-group row text-center">
+
+            </div>
+
+            <div #alertMessage *ngIf="isError" class="alert alert-danger alert-dismissible fade show" role="alert">
+                <button type="button" class="close" aria-label="Close" (click)="closeAlert()">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+                <strong>¡Error!</strong> {{errorMessage}}
+            </div>
+
+        </form>
+    </div>
+</div>
